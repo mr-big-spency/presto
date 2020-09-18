@@ -32,22 +32,22 @@ import java.util.Properties;
 
 import static io.airlift.configuration.ConfigBinder.configBinder;
 
-public class MySqlClientModule
+public class SplunkClientModule
         implements Module
 {
     @Override
     public void configure(Binder binder)
     {
-        binder.bind(JdbcClient.class).annotatedWith(ForBaseJdbc.class).to(MySqlClient.class).in(Scopes.SINGLETON);
-        configBinder(binder).bindConfig(MySqlJdbcConfig.class);
-        configBinder(binder).bindConfig(MySqlConfig.class);
+        binder.bind(JdbcClient.class).annotatedWith(ForBaseJdbc.class).to(SplunkClient.class).in(Scopes.SINGLETON);
+        configBinder(binder).bindConfig(SplunkJdbcConfig.class);
+        configBinder(binder).bindConfig(SplunkConfig.class);
         binder.install(new DecimalModule());
     }
 
     @Provides
     @Singleton
     @ForBaseJdbc
-    public static ConnectionFactory createConnectionFactory(BaseJdbcConfig config, CredentialProvider credentialProvider, MySqlConfig mySqlConfig)
+    public static ConnectionFactory createConnectionFactory(BaseJdbcConfig config, CredentialProvider credentialProvider, SplunkConfig mySqlConfig)
             throws SQLException
     {
         Properties connectionProperties = new Properties();

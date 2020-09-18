@@ -24,12 +24,12 @@ import static io.airlift.configuration.testing.ConfigAssertions.assertFullMappin
 import static io.airlift.configuration.testing.ConfigAssertions.assertRecordedDefaults;
 import static io.airlift.configuration.testing.ConfigAssertions.recordDefaults;
 
-public class TestMySqlConfig
+public class TestSplunkConfig
 {
     @Test
     public void testDefaults()
     {
-        assertRecordedDefaults(recordDefaults(MySqlConfig.class)
+        assertRecordedDefaults(recordDefaults(SplunkConfig.class)
                 .setAutoReconnect(true)
                 .setMaxReconnects(3)
                 .setConnectionTimeout(new Duration(10, TimeUnit.SECONDS))
@@ -46,7 +46,7 @@ public class TestMySqlConfig
                 .put("mysql.jdbc.use-information-schema", "false")
                 .build();
 
-        MySqlConfig expected = new MySqlConfig()
+        SplunkConfig expected = new SplunkConfig()
                 .setAutoReconnect(false)
                 .setMaxReconnects(4)
                 .setConnectionTimeout(new Duration(4, TimeUnit.SECONDS))

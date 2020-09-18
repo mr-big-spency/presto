@@ -41,7 +41,7 @@ import static io.prestosql.testing.assertions.Assert.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.assertTrue;
 
-public class TestMySqlClient
+public class TestSplunkClient
 {
     private static final TypeManager TYPE_MANAGER = new InternalTypeManager(createTestMetadataManager());
 
@@ -59,7 +59,7 @@ public class TestMySqlClient
                     .setJdbcTypeHandle(new JdbcTypeHandle(Types.DOUBLE, Optional.of("double"), 0, 0, Optional.empty()))
                     .build();
 
-    private static final JdbcClient JDBC_CLIENT = new MySqlClient(
+    private static final JdbcClient JDBC_CLIENT = new SplunkClient(
             new BaseJdbcConfig(),
             identity -> {
                 throw new UnsupportedOperationException();

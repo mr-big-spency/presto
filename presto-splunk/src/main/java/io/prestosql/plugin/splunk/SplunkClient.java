@@ -19,23 +19,13 @@ import io.prestosql.plugin.jdbc.BaseJdbcConfig;
 import io.prestosql.plugin.jdbc.ColumnMapping;
 import io.prestosql.plugin.jdbc.ConnectionFactory;
 import io.prestosql.plugin.jdbc.JdbcColumnHandle;
-import io.prestosql.plugin.jdbc.JdbcExpression;
 import io.prestosql.plugin.jdbc.JdbcIdentity;
 import io.prestosql.plugin.jdbc.JdbcTableHandle;
 import io.prestosql.plugin.jdbc.JdbcTypeHandle;
 import io.prestosql.plugin.jdbc.PredicatePushdownController;
 import io.prestosql.plugin.jdbc.WriteMapping;
-import io.prestosql.plugin.jdbc.expression.AggregateFunctionRewriter;
-import io.prestosql.plugin.jdbc.expression.AggregateFunctionRule;
-import io.prestosql.plugin.jdbc.expression.ImplementAvgDecimal;
-import io.prestosql.plugin.jdbc.expression.ImplementAvgFloatingPoint;
-import io.prestosql.plugin.jdbc.expression.ImplementCount;
-import io.prestosql.plugin.jdbc.expression.ImplementCountAll;
-import io.prestosql.plugin.jdbc.expression.ImplementMinMax;
-import io.prestosql.plugin.jdbc.expression.ImplementSum;
 import io.prestosql.spi.PrestoException;
-import io.prestosql.spi.connector.AggregateFunction;
-import io.prestosql.spi.connector.ColumnHandle;
+
 import io.prestosql.spi.connector.ConnectorSession;
 import io.prestosql.spi.connector.ConnectorTableMetadata;
 import io.prestosql.spi.connector.SchemaTableName;
@@ -57,7 +47,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
@@ -96,37 +85,16 @@ import static java.lang.String.format;
 import static java.math.RoundingMode.UNNECESSARY;
 import static java.util.Locale.ENGLISH;
 
-public class MySqlClient
+public class SplunkClient
         extends BaseJdbcClient
 {
     private final Type jsonType;
-    private final AggregateFunctionRewriter aggregateFunctionRewriter;
 
     @Inject
-    public MySqlClient(BaseJdbcConfig config, ConnectionFactory connectionFactory, TypeManager typeManager)
+    public SplunkClient(BaseJdbcConfig config, ConnectionFactory connectionFactory, TypeManager typeManager)
     {
         super(config, "`", connectionFactory);
         this.jsonType = typeManager.getType(new TypeSignature(StandardTypes.JSON));
-
-        JdbcTypeHandle bigintTypeHandle = new JdbcTypeHandle(Types.BIGINT, Optional.of("bigint"), 0, 0, Optional.empty(), Optional.empty());
-        this.aggregateFunctionRewriter = new AggregateFunctionRewriter(
-                this::quoted,
-                ImmutableSet.<AggregateFunctionRule>builder()
-                        .add(new ImplementCountAll(bigintTypeHandle))
-                        .add(new ImplementCount(bigintTypeHandle))
-                        .add(new ImplementMinMax())
-                        .add(new ImplementSum(MySqlClient::toTypeHandle))
-                        .add(new ImplementAvgFloatingPoint())
-                        .add(new ImplementAvgDecimal())
-                        .add(new ImplementAvgBigint())
-                        .build());
-    }
-
-    @Override
-    public Optional<JdbcExpression> implementAggregation(ConnectorSession session, AggregateFunction aggregate, Map<String, ColumnHandle> assignments)
-    {
-        // TODO support complex ConnectorExpressions
-        return aggregateFunctionRewriter.rewrite(session, aggregate, assignments);
     }
 
     private static Optional<JdbcTypeHandle> toTypeHandle(DecimalType decimalType)

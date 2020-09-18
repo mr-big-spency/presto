@@ -79,7 +79,7 @@ import static java.math.RoundingMode.UNNECESSARY;
 import static java.util.Arrays.asList;
 import static java.util.function.Function.identity;
 
-public class TestMySqlTypeMapping
+public class TestSplunkTypeMapping
         extends AbstractTestQueryFramework
 {
     private static final String CHARACTER_SET_UTF8 = "CHARACTER SET utf8";

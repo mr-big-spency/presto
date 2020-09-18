@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 import static com.google.common.collect.Iterables.getOnlyElement;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class TestMySqlPlugin
+public class TestSplunkPlugin
 {
     @Test
     public void testCreateConnector()
@@ -38,7 +38,7 @@ public class TestMySqlPlugin
 
     private static void createMySqlPlugin(String url)
     {
-        Plugin plugin = new MySqlPlugin();
+        Plugin plugin = new SplunkPlugin();
         ConnectorFactory factory = getOnlyElement(plugin.getConnectorFactories());
         factory.create("test", ImmutableMap.of("connection-url", url), new TestingConnectorContext());
     }

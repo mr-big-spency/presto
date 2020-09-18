@@ -21,7 +21,7 @@ import javax.validation.constraints.Min;
 
 import java.util.concurrent.TimeUnit;
 
-public class MySqlConfig
+public class SplunkConfig
 {
     private boolean autoReconnect = true;
     private int maxReconnects = 3;
@@ -38,7 +38,7 @@ public class MySqlConfig
     }
 
     @Config("mysql.auto-reconnect")
-    public MySqlConfig setAutoReconnect(boolean autoReconnect)
+    public SplunkConfig setAutoReconnect(boolean autoReconnect)
     {
         this.autoReconnect = autoReconnect;
         return this;
@@ -51,7 +51,7 @@ public class MySqlConfig
     }
 
     @Config("mysql.max-reconnects")
-    public MySqlConfig setMaxReconnects(int maxReconnects)
+    public SplunkConfig setMaxReconnects(int maxReconnects)
     {
         this.maxReconnects = maxReconnects;
         return this;
@@ -63,7 +63,7 @@ public class MySqlConfig
     }
 
     @Config("mysql.connection-timeout")
-    public MySqlConfig setConnectionTimeout(Duration connectionTimeout)
+    public SplunkConfig setConnectionTimeout(Duration connectionTimeout)
     {
         this.connectionTimeout = connectionTimeout;
         return this;
@@ -76,7 +76,7 @@ public class MySqlConfig
 
     @Config("mysql.jdbc.use-information-schema")
     @ConfigDescription("Value of useInformationSchema MySQL JDBC driver connection property")
-    public MySqlConfig setDriverUseInformationSchema(boolean driverUseInformationSchema)
+    public SplunkConfig setDriverUseInformationSchema(boolean driverUseInformationSchema)
     {
         this.driverUseInformationSchema = driverUseInformationSchema;
         return this;

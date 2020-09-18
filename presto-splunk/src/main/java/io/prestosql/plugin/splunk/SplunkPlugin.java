@@ -13,22 +13,13 @@
  */
 package io.prestosql.plugin.splunk;
 
-import io.prestosql.plugin.jdbc.BaseJdbcConfig;
+import io.prestosql.plugin.jdbc.JdbcPlugin;
 
-import javax.validation.constraints.AssertTrue;
-
-public class MySqlJdbcConfig
-        extends BaseJdbcConfig
+public class SplunkPlugin
+        extends JdbcPlugin
 {
-    @AssertTrue(message = "Invalid JDBC URL for MySQL connector")
-    public boolean isUrlValid()
+    public SplunkPlugin()
     {
-        return true;
-    }
-
-    @AssertTrue(message = "Database (catalog) must not be specified in JDBC URL for MySQL connector")
-    public boolean isUrlWithoutDatabase()
-    {
-        return true;
+        super("mysql", new SplunkClientModule());
     }
 }
