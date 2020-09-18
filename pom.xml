@@ -136,6 +136,7 @@
         <module>presto-server-rpm</module>
         <module>presto-session-property-managers</module>
         <module>presto-spi</module>
+        <module>presto-splunk</module>
         <module>presto-sqlserver</module>
         <module>presto-teradata-functions</module>
         <module>presto-test-jdbc-compatibility-old-driver</module>
@@ -418,6 +419,12 @@
                 <artifactId>presto-spi</artifactId>
                 <version>${project.version}</version>
                 <type>test-jar</type>
+            </dependency>
+
+            <dependency>
+                <groupId>io.prestosql</groupId>
+                <artifactId>presto-splunk</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
@@ -1256,6 +1263,13 @@
                 <artifactId>snappy-java</artifactId>
                 <version>1.1.7.3</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.unity</groupId>
+                <artifactId>splunk</artifactId>
+                <version>1.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
