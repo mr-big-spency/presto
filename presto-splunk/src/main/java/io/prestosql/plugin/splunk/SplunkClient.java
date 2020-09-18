@@ -25,7 +25,6 @@ import io.prestosql.plugin.jdbc.JdbcTypeHandle;
 import io.prestosql.plugin.jdbc.PredicatePushdownController;
 import io.prestosql.plugin.jdbc.WriteMapping;
 import io.prestosql.spi.PrestoException;
-
 import io.prestosql.spi.connector.ConnectorSession;
 import io.prestosql.spi.connector.ConnectorTableMetadata;
 import io.prestosql.spi.connector.SchemaTableName;
