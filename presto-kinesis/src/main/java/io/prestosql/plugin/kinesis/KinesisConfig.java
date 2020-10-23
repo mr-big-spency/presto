@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 public class KinesisConfig
 {
     private String defaultSchema = "default";
-    private String tableDescriptionLocation = "etc/kinesis/";
+    private String tableDescriptionLocations = "etc/kinesis/";
     private boolean hideInternalColumns = true;
     private String awsRegion = "us-east-1";
     private int batchSize = 10000;
@@ -48,14 +48,14 @@ public class KinesisConfig
     @NotNull
     public String getTableDescriptionLocation()
     {
-        return tableDescriptionLocation;
+        return tableDescriptionLocations;
     }
 
-    @Config("kinesis.table-description-location")
+    @Config("kinesis.table-description-locations")
     @ConfigDescription("S3 or local filesystem directory location where table schema descriptions are present")
-    public KinesisConfig setTableDescriptionLocation(String tableDescriptionLocation)
+    public KinesisConfig setTableDescriptionLocations(String tableDescriptionLocations)
     {
-        this.tableDescriptionLocation = tableDescriptionLocation;
+        this.tableDescriptionLocations = tableDescriptionLocations;
         return this;
     }
 
