@@ -39,6 +39,7 @@ public class KinesisConfig
     private String secretKey;
     private boolean logKinesisBatches = true;
     private boolean checkpointEnabled;
+    private String dynamoTableName;
     private long dynamoReadCapacity = 50L;
     private long dynamoWriteCapacity = 10L;
     private Duration checkpointInterval = new Duration(60000, TimeUnit.MILLISECONDS);
